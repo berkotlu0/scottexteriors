@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, Calendar, Mail, X, Send, MessageCircle, CheckCircle2 } from "lucide-react";
 
@@ -24,23 +23,12 @@ export default function FloatingWidget() {
     }
 
     setLoading(true);
-    const { error } = await supabase
-      .from('contact_messages')
-      .insert([
-        { 
-          name: formData.name, 
-          email: formData.email || 'N/A', 
-          subject: type === "Consultation" ? "Quick Quote Request" : "Quick Message",
-          message: `Phone: ${formData.phone} - Note: ${formData.message}`,
-        },
-      ]);
 
-    if (error) {
-      alert("Error: " + error.message);
-    } else {
-      setSuccess(true);
-      setLastSentTime(now);
-    }
+    // --- FAKE (SAHTE) YÜKLEME ---
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    setSuccess(true);
+    setLastSentTime(now);
     setLoading(false);
   };
 
@@ -95,7 +83,7 @@ export default function FloatingWidget() {
                     <form className="flex flex-col gap-4">
                       <h3 className="font-bold text-2xl text-white mb-2 italic">Quick Message</h3>
                       <textarea rows={3} placeholder="Project details..." value={formData.message} onChange={(e)=>setFormData({...formData, message:e.target.value})} className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-4 text-white focus:border-[#3A6B9C] outline-none resize-none" />
-                      <button type="button" onClick={()=>handleSubmit("SMS")} className="bg-[#3A6B9C] text-white py-4 rounded-xl font-black tracking-widest uppercase text-xs">SEND MESSAGE</button>
+                      <button type="button" onClick={()=>handleSubmit("SMS")} className="bg-[#3A6B9C] text-white py-4 rounded-xl font-black tracking-widest uppercase text-xs">{loading ? "SENDING..." : "SEND MESSAGE"}</button>
                     </form>
                   )}
 
