@@ -24,3 +24,87 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Logoların pürüzsüz, sürekli akması için animasyon */
+@keyframes infinite-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); } /* Bandın yarısı kadar sola kaydırır */
+}
+
+.animate-infinite-scroll {
+  display: flex; /* Flex yapısını koru */
+  animation: infinite-scroll 35s linear infinite; /* Hızı buradan ayarlayabilirsin, linear olması pürüzsüzleştirir */
+}
+
+/* Mouse ile üzerine gelince animasyonu durdurmak için opsiyonel: */
+.animate-infinite-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Kutuların içindeki balonların sürekli, yavaşça yüzmesi için animasyon */
+@keyframes float-blob {
+  0% { transform: translate(0px, 0px) scale(1); opacity: 0.5; }
+  33% { transform: translate(20px, -20px) scale(1.1); opacity: 0.8; }
+  66% { transform: translate(-15px, 15px) scale(1.05); opacity: 0.6; }
+  100% { transform: translate(0px, 0px) scale(1); opacity: 0.5; }
+}
+
+.animate-float-blob {
+  animation: float-blob 20s ease-in-out infinite; /* Çok yavaş ve akışkan */
+}
+
+/* Globals.css sonuna ekle */
+
+/* Popup Arka Plan Dalga Animasyonları (Wave effect) */
+@keyframes wave {
+  0% { transform: translate(-50%, -75%); }
+  50% { transform: translate(-50%, -70%); }
+  100% { transform: translate(-50%, -75%); }
+}
+
+@keyframes wave-fast {
+  0% { transform: translate(-50%, -70%); }
+  50% { transform: translate(-50%, -65%); }
+  100% { transform: translate(-50%, -70%); }
+}
+
+.animate-wave {
+  animation: wave 10s ease-in-out infinite;
+}
+
+.animate-wave-fast {
+  animation: wave-fast 8s ease-in-out infinite;
+}
+
+/* Yüzen Widget için Nabız Efekti (Pulsing) */
+@keyframes pulse-widget {
+  0% { box-shadow: 0 0 0 0 rgba(58, 107, 156, 0.6); }
+  70% { box-shadow: 0 0 0 15px rgba(58, 107, 156, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(58, 107, 156, 0); }
+}
+
+.animate-pulse-widget {
+  animation: pulse-widget 2s infinite;
+}
+
+/* Globals.css sonuna ekle */
+
+/* Popup Arka Plan Dalga Animasyonlu Alan Animasyonları (Wave effect) */
+@keyframes wave {
+  0% { transform: translate(-50%, -75%); }
+  50% { transform: translate(-50%, -70%); }
+  100% { transform: translate(-50%, -75%); }
+}
+
+@keyframes wave-fast {
+  0% { transform: translate(-50%, -70%); }
+  50% { transform: translate(-50%, -65%); }
+}
+
+.animate-wave {
+  animation: wave 10s ease-in-out infinite;
+}
+
+.animate-wave-fast {
+  animation: wave-fast 8s ease-in-out infinite;
+}
