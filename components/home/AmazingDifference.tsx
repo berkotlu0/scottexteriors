@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Download } from 'lucide-react'; // Download ikonu eklendi!
 
 export default function AmazingDifference() {
   // Sol tarafta otomatik dönecek lüks görseller
@@ -45,7 +45,6 @@ export default function AmazingDifference() {
   const duplicatedLogos = [...partnerLogos, ...partnerLogos];
 
   return (
-    // bg-white -> TrustBar'ın maviliğinden sonra bembeyaz, ferah bir geçiş
     <section className="relative w-full py-24 bg-white overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6">
         
@@ -84,21 +83,20 @@ export default function AmazingDifference() {
 
           {/* Sağ Taraf: "The Amazing Difference" Metinleri */}
           <div className="w-full lg:w-1/2 flex flex-col justify-center">
-            <h4 className="text-[#3A6B9C] font-black tracking-[0.2em] uppercase mb-4 text-sm">
+            <h4 className="text-[#3A6B9C] font-black tracking-[0.2em] uppercase mb-4 text-sm text-center lg:text-left">
               The Amazing Difference
             </h4>
-            <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-6 tracking-tight">
-              Complete Exterior <br/> Transformation Solutions
+            <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-6 tracking-tight text-center lg:text-left">
+              Complete Exterior <br className="hidden lg:block"/> Transformation Solutions
             </h2>
-            <p className="text-lg text-slate-600 mb-10 leading-relaxed font-medium">
+            <p className="text-lg text-slate-600 mb-10 leading-relaxed font-medium text-center lg:text-left">
               Amazing Exteriors has built its reputation on partnerships with the industry’s best manufacturers. When you choose us, you receive:
             </p>
             
-            {/* Özel Check İkonlu Liste - Tik rengi MAVİ oldu */}
+            {/* Özel Check İkonlu Liste */}
             <ul className="space-y-5">
               {features.map((item, idx) => (
                 <li key={idx} className="flex items-start gap-4 group">
-                  {/* Tik Rengi Mavi (#3A6B9C) */}
                   <CheckCircle2 className="text-[#3A6B9C] w-6 h-6 flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" strokeWidth={2.5} />
                   <span className="text-slate-700 font-medium leading-relaxed">
                     {item}
@@ -107,23 +105,31 @@ export default function AmazingDifference() {
               ))}
             </ul>
 
-            {/* CTA Butonu -> Metin güncellendi */}
-            <button className="mt-12 w-fit bg-slate-900 hover:bg-[#3A6B9C] text-white font-bold text-[14px] px-10 py-4 rounded transition-colors shadow-lg tracking-widest uppercase transform hover:-translate-y-1">
-              Download Free Guide
-            </button>
+            {/* 🔥 EFSANE CTA BUTONU BURADA 🔥 */}
+            <div className="mt-14 w-full flex justify-center">
+              <div className="relative group cursor-pointer">
+                {/* Arkada sürekli nefes alan parıltı (Glow) efekti */}
+                <div className="absolute -inset-1.5 bg-gradient-to-r from-[#3A6B9C] via-[#DE5D5D] to-[#3A6B9C] rounded-full blur opacity-50 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
+                
+                {/* Ana Buton */}
+                <button className="relative flex items-center gap-3 bg-slate-900 group-hover:bg-[#3A6B9C] text-white font-black text-[15px] px-12 py-5 rounded-full transition-all duration-300 shadow-[0_10px_30px_rgba(58,107,156,0.4)] tracking-[0.2em] uppercase transform group-hover:-translate-y-1 active:scale-95">
+                  <span>Download Free Guide</span>
+                  <Download size={20} className="group-hover:translate-y-1 transition-transform duration-300" strokeWidth={2.5} />
+                </button>
+              </div>
+            </div>
+            
           </div>
 
         </div>
 
-        {/* 2. Alt Kısım: Partner Logoları Bandı -> SÜREKLİ AKIŞ (Carousel) */}
+        {/* 2. Alt Kısım: Partner Logoları Bandı */}
         <div className="pt-16 border-t border-gray-100">
           <p className="text-center text-sm font-bold text-slate-400 uppercase tracking-widest mb-10">
             Trusted by the Industry's Best
           </p>
           
-          {/* Logo Bandı Container - animate-infinite-scroll eklendi */}
           <div className="w-full overflow-hidden relative">
-            {/* Bu divglobals.css'teki animasyonu kullanır */}
             <div className="animate-infinite-scroll flex items-center gap-16 md:gap-20">
               {duplicatedLogos.map((logo, index) => (
                 <div key={index} className="relative flex-shrink-0 h-12 w-32 md:h-16 md:w-40 grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100">
@@ -137,7 +143,6 @@ export default function AmazingDifference() {
               ))}
             </div>
             
-            {/* Sol ve Sağ kenarlarda yumuşak geçiş gölgeleri (Opsiyonel ama Elite durur) */}
             <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white to-transparent z-10"></div>
             <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white to-transparent z-10"></div>
           </div>

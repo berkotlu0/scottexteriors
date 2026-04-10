@@ -5,7 +5,7 @@ import { MapPin, Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import Image from 'next/image';
 
 export default function ServiceAreas() {
-  // 1. Hizmet Bölgeleri Verisi (Senin attığın görseldeki şehirler)
+  // 1. Hizmet Bölgeleri Verisi
   const locations = [
     { city: "Boise", state: "Idaho", mapQuery: "Boise,+ID" },
     { city: "Oklahoma City", state: "Oklahoma", mapQuery: "Oklahoma+City,+OK" },
@@ -17,7 +17,7 @@ export default function ServiceAreas() {
     { city: "Ogden", state: "Utah", mapQuery: "Ogden,+UT" }
   ];
 
-  // 2. Google Yorumları Verisi (SEO Uyumlu ve İnandırıcı)
+  // 2. Google Yorumları Verisi
   const googleReviews = [
     {
       id: 1,
@@ -64,11 +64,10 @@ export default function ServiceAreas() {
   const prevReview = () => setCurrentReview((prev) => (prev === 0 ? googleReviews.length - 1 : prev - 1));
 
   return (
-    // bg-white -> Önceki mavimsi bölümden sonra temiz beyaza dönüyoruz
     <section className="relative w-full py-24 bg-white overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6">
         
-        {/* --- 1. BÖLÜM: SERVICE AREAS (HİZMET BÖLGELERİ) --- */}
+        {/* --- 1. BÖLÜM: SERVICE AREAS --- */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <p className="text-[#3A6B9C] font-black tracking-[0.2em] uppercase mb-4 text-sm">
             Where We Work
@@ -81,12 +80,12 @@ export default function ServiceAreas() {
           </p>
         </div>
 
-        {/* Lokasyon Grid'i (Harita yerine şık, tıklanabilir Pin Kartları) */}
+        {/* Lokasyon Grid'i */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-32">
           {locations.map((loc, idx) => (
             <a 
               key={idx} 
-              href={`https://maps.google.com/?q=${loc.mapQuery}`}
+              href={`https://maps.google.com/?q=$${loc.mapQuery}`}
               target="_blank"
               rel="noopener noreferrer"
               className="group bg-[#F8F9FA] border border-gray-100 rounded-xl p-6 flex flex-col items-center justify-center text-center hover:bg-[#3A6B9C] hover:border-[#3A6B9C] transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
@@ -104,21 +103,19 @@ export default function ServiceAreas() {
           ))}
         </div>
 
-
         {/* --- 2. BÖLÜM: GOOGLE YORUMLARI CAROUSEL --- */}
         <div className="max-w-5xl mx-auto relative">
           
-          {/* Arka plandaki dev tırnak işareti (Dekoratif) */}
-          <div className="absolute -top-10 -left-10 text-gray-100 z-0">
+          {/* Arka plandaki dev tırnak işareti */}
+          <div className="absolute -top-10 -left-10 text-gray-100 z-0 hidden md:block">
             <Quote size={120} fill="currentColor" />
           </div>
 
-          <div className="relative z-10 bg-white rounded-3xl border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.05)] p-10 md:p-16">
+          <div className="relative z-10 bg-white rounded-3xl border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.05)] p-8 md:p-16">
             
             {/* Google Logosu ve Yıldızlar */}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 border-b border-gray-100 pb-6">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 md:mb-10 border-b border-gray-100 pb-6">
               <div className="flex items-center gap-3 mb-4 md:mb-0">
-                {/* SVG Google Logosu (Eğer public/logo/google-logo.svg varsa Image ile çağır, yoksa text ile yazdım) */}
                 <span className="text-2xl font-bold tracking-tighter">
                   <span className="text-[#4285F4]">G</span>
                   <span className="text-[#EA4335]">o</span>
@@ -127,7 +124,7 @@ export default function ServiceAreas() {
                   <span className="text-[#34A853]">l</span>
                   <span className="text-[#EA4335]">e</span>
                 </span>
-                <span className="text-slate-400 font-medium text-sm border-l border-gray-300 pl-3">
+                <span className="text-slate-400 font-medium text-xs md:text-sm border-l border-gray-300 pl-3">
                   Verified Customer Reviews
                 </span>
               </div>
@@ -135,25 +132,25 @@ export default function ServiceAreas() {
               <div className="flex items-center gap-2">
                 <div className="flex gap-1">
                   {[1, 2, 3, 4, 5].map((star) => (
-                    <Star key={star} size={22} className="text-[#FBBC05] fill-[#FBBC05]" />
+                    <Star key={star} size={20} className="text-[#FBBC05] fill-[#FBBC05]" />
                   ))}
                 </div>
-                <span className="font-bold text-slate-800 ml-2">4.9/5 Rating</span>
+                <span className="font-bold text-slate-800 ml-2 text-sm md:text-base">4.9/5 Rating</span>
               </div>
             </div>
 
             {/* Carousel İçeriği */}
-            <div className="relative min-h-[180px] flex items-center">
+            <div className="relative min-h-[220px] md:min-h-[180px] flex flex-col justify-between">
               <div className="w-full transition-opacity duration-500 ease-in-out">
-                <p className="text-xl md:text-2xl text-slate-700 leading-relaxed font-medium italic mb-8">
+                <p className="text-lg md:text-2xl text-slate-700 leading-relaxed font-medium italic mb-8">
                   "{googleReviews[currentReview].text}"
                 </p>
                 <div className="flex items-center justify-between">
                   <div>
-                    <h4 className="font-bold text-slate-900 text-lg">
+                    <h4 className="font-bold text-slate-900 text-base md:text-lg">
                       {googleReviews[currentReview].name}
                     </h4>
-                    <p className="text-sm text-slate-500 font-medium">
+                    <p className="text-xs md:text-sm text-slate-500 font-medium">
                       {googleReviews[currentReview].location} • {googleReviews[currentReview].date}
                     </p>
                   </div>
@@ -161,19 +158,19 @@ export default function ServiceAreas() {
               </div>
             </div>
 
-            {/* Carousel Kontrolleri (Sağ-Sol Oklar) */}
-            <div className="absolute bottom-10 right-10 flex gap-3">
+            {/* 🔥 Carousel Kontrolleri (Mobilde Küçük, PC'de Büyük) 🔥 */}
+            <div className="absolute bottom-6 right-6 md:bottom-10 md:right-10 flex gap-2 md:gap-3">
               <button 
                 onClick={prevReview}
-                className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-slate-600 hover:bg-[#3A6B9C] hover:text-white hover:border-[#3A6B9C] transition-all shadow-sm"
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-gray-200 flex items-center justify-center text-slate-600 hover:bg-[#3A6B9C] hover:text-white hover:border-[#3A6B9C] transition-all shadow-sm"
               >
-                <ChevronLeft size={24} />
+                <ChevronLeft size={20} className="md:w-6 md:h-6" />
               </button>
               <button 
                 onClick={nextReview}
-                className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-slate-600 hover:bg-[#3A6B9C] hover:text-white hover:border-[#3A6B9C] transition-all shadow-sm"
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-gray-200 flex items-center justify-center text-slate-600 hover:bg-[#3A6B9C] hover:text-white hover:border-[#3A6B9C] transition-all shadow-sm"
               >
-                <ChevronRight size={24} />
+                <ChevronRight size={20} className="md:w-6 md:h-6" />
               </button>
             </div>
 

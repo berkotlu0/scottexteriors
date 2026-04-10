@@ -102,14 +102,18 @@ export default function FloatingWidget() {
         )}
       </AnimatePresence>
 
-      <div className="flex items-center gap-3">
+      {/* BURASI DEĞİŞTİ: Mobilde flex-col (yukarı), Masaüstünde flex-row (yana) */}
+      <div className="flex flex-col md:flex-row items-end md:items-center gap-3">
         <AnimatePresence>
           {isExpanded && (
             <motion.div
-              initial={{ width: 0, opacity: 0, x: 20 }}
-              animate={{ width: "auto", opacity: 1, x: 0 }}
-              exit={{ width: 0, opacity: 0, x: 20 }}
-              className="relative p-[1px] overflow-hidden rounded-full shadow-[0_0_40px_rgba(58,107,156,0.3)]"
+              // Animasyon artık genişlik değil, genel bir "pop-out" efekti veriyor.
+              // Bu sayede hem dikeyde hem yatayda kusursuz görünüyor.
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              style={{ transformOrigin: "bottom right" }}
+              className="relative p-[1px] overflow-hidden rounded-[1.5rem] md:rounded-full shadow-[0_0_40px_rgba(58,107,156,0.3)]"
             >
               <motion.div
                 initial={{ rotate: 0 }}
@@ -118,7 +122,8 @@ export default function FloatingWidget() {
                 style={{ background: "conic-gradient(from 0deg, transparent 0%, #3A6B9C 50%, transparent 100%)" }}
                 className="absolute inset-[-200%] z-0"
               />
-              <div className="relative z-10 bg-[#050505]/95 backdrop-blur-3xl flex items-center p-1.5 rounded-full whitespace-nowrap">
+              {/* İç Kısım: Mobilde flex-col (alt alta liste), Masaüstünde flex-row (yan yana) */}
+              <div className="relative z-10 bg-[#050505]/95 backdrop-blur-3xl flex flex-col md:flex-row items-stretch md:items-center p-2 md:p-1.5 rounded-[1.5rem] md:rounded-full whitespace-nowrap gap-1 md:gap-0">
                 {[
                   { id: "call", icon: Phone, label: "Call" },
                   { id: "book", icon: Calendar, label: "Quote" },
@@ -131,7 +136,7 @@ export default function FloatingWidget() {
                       setActiveTab(activeTab === item.id ? null : item.id);
                       setSuccess(false);
                     }}
-                    className={`flex items-center gap-2 px-5 py-3 rounded-full transition-all duration-500 ${activeTab === item.id ? 'bg-[#3A6B9C] text-white' : 'text-white/40 hover:text-[#3A6B9C]'}`}
+                    className={`flex items-center justify-start md:justify-center gap-3 md:gap-2 px-5 py-3.5 md:py-3 rounded-full md:rounded-full transition-all duration-500 ${activeTab === item.id ? 'bg-[#3A6B9C] text-white' : 'text-white/40 hover:text-[#3A6B9C]'}`}
                   >
                     <item.icon size={15} />
                     <span className="text-[10px] font-black uppercase tracking-widest">{item.label}</span>
@@ -146,7 +151,7 @@ export default function FloatingWidget() {
           onClick={() => setIsExpanded(!isExpanded)}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="relative w-16 h-16 flex items-center justify-center rounded-full bg-[#050505] border border-white/10 hover:border-[#3A6B9C]/50 shadow-[0_15px_40px_rgba(0,0,0,0.4)] group overflow-hidden"
+          className="relative w-16 h-16 flex items-center justify-center rounded-full bg-[#050505] border border-white/10 hover:border-[#3A6B9C]/50 shadow-[0_15px_40px_rgba(0,0,0,0.4)] group overflow-hidden shrink-0"
         >
           <motion.div
             initial={{ rotate: 0 }} 

@@ -1,4 +1,7 @@
+"use client";
+
 import React from 'react';
+import { motion } from 'framer-motion';
 import { 
   Zap, 
   ShieldCheck, 
@@ -46,12 +49,10 @@ export default function WhyTrustUs() {
   ];
 
   return (
-    // bg-[#EFF6FC] -> Jilet gibi MAVİMSİ BEYAZ geçiş rengi buraya çakıldı!
-    // border-y border-gray-100 -> Bölümü netleştirir
     <section className="relative w-full py-24 bg-[#EFF6FC] border-y border-gray-100 shadow-inner overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-6">
         
-        {/* --- 1. BÖLÜM: WHY TRUST US (Animasyonlu Kartlar) --- */}
+        {/* --- 1. BÖLÜM: WHY TRUST US --- */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <p className="text-[#3A6B9C] font-black tracking-[0.2em] uppercase mb-4 text-sm">
             The Amazing Standard
@@ -68,15 +69,26 @@ export default function WhyTrustUs() {
               key={idx} 
               className="group bg-white p-10 rounded-2xl border border-gray-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 relative overflow-hidden cursor-default"
             >
-              {/* SÜREKLİ HAREKET EDEN BALON -> animate-float-blob eklendi */}
-              {/* Balonun rengini section arkaplanıyla uyumlu yapmak için bg-[#D9E8F5] kullandık */}
+              {/* SÜREKLİ HAREKET EDEN BALON */}
               <div className="absolute -right-10 -top-10 w-48 h-48 bg-[#D9E8F5] rounded-full animate-float-blob group-hover:scale-[1.8] transition-transform duration-1000 ease-out z-0"></div>
               
               <div className="relative z-10 flex flex-col sm:flex-row gap-6 items-start">
-                {/* İkon Kutusu */}
-                <div className="bg-white shadow-md p-4 rounded-xl text-[#3A6B9C] group-hover:text-[#DE5D5D] group-hover:rotate-6 transition-all duration-300 flex-shrink-0">
-                  <feature.icon size={36} strokeWidth={1.5} />
+                
+                {/* 🔥 İKON KUTUSU - Loop Animasyonu Burada 🔥 */}
+                <div className="bg-white shadow-md p-4 rounded-xl text-[#3A6B9C] group-hover:text-[#DE5D5D] transition-colors duration-500 flex-shrink-0">
+                  <motion.div
+                    animate={{ y: [0, -6, 0] }} // Yukarı aşağı süzülme
+                    transition={{ 
+                      duration: 3, // 3 saniyede bir tur
+                      repeat: Infinity, // Sonsuz döngü
+                      ease: "easeInOut", // Yumuşak geçiş
+                      delay: idx * 0.2 // Hepsi aynı anda zıplamasın diye ufak gecikmeler
+                    }}
+                  >
+                    <feature.icon size={36} strokeWidth={1.5} />
+                  </motion.div>
                 </div>
+
                 <div>
                   <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-[#3A6B9C] transition-colors">
                     {feature.title}
@@ -90,8 +102,7 @@ export default function WhyTrustUs() {
           ))}
         </div>
 
-
-        {/* --- 2. BÖLÜM: 5-STEP PROCESS (Animasyonlu Timeline) --- */}
+        {/* --- 2. BÖLÜM: 5-STEP PROCESS --- */}
         <div className="mt-20">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-extrabold text-[#1D3557] tracking-tight">
@@ -100,27 +111,34 @@ export default function WhyTrustUs() {
             <div className="w-24 h-1.5 bg-[#DE5D5D] mx-auto mt-6 rounded-full"></div>
           </div>
 
-          {/* Timeline Container */}
           <div className="relative">
             {/* Masaüstü için arkadan geçen yatay çizgi */}
             <div className="hidden lg:block absolute top-12 left-0 w-full h-[2px] bg-gray-200 z-0"></div>
 
-            {/* Adımlar */}
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-6 relative z-10">
               {processSteps.map((step, idx) => (
                 <div key={idx} className="flex flex-col items-center text-center group">
                   
                   {/* Numara ve İkon (Yuvarlak Kutu) */}
                   <div className="relative w-24 h-24 bg-white rounded-full border-4 border-gray-100 flex items-center justify-center shadow-lg group-hover:border-[#3A6B9C] group-hover:scale-110 transition-all duration-500 mb-6">
-                    {/* Adım Numarası (Hafif silik arkada) */}
-                    <span className="absolute -top-2 -right-2 bg-[#1D3557] text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shadow-md">
+                    <span className="absolute -top-2 -right-2 bg-[#1D3557] text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm shadow-md z-20">
                       {idx + 1}
                     </span>
-                    {/* İkon */}
-                    <step.icon size={32} className="text-[#3A6B9C] group-hover:text-[#DE5D5D] transition-colors duration-300" strokeWidth={1.5} />
+                    
+                    {/* Alttaki yuvarlak ikonlar için de ufak bir "Nefes Alma" loop animasyonu */}
+                    <motion.div
+                      animate={{ scale: [1, 1.1, 1] }} 
+                      transition={{ 
+                        duration: 3, 
+                        repeat: Infinity, 
+                        ease: "easeInOut",
+                        delay: idx * 0.3
+                      }}
+                    >
+                      <step.icon size={32} className="text-[#3A6B9C] group-hover:text-[#DE5D5D] transition-colors duration-300 relative z-10" strokeWidth={1.5} />
+                    </motion.div>
                   </div>
 
-                  {/* Metin */}
                   <h4 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-[#3A6B9C] transition-colors">
                     {step.title}
                   </h4>
@@ -131,7 +149,6 @@ export default function WhyTrustUs() {
               ))}
             </div>
           </div>
-
         </div>
 
       </div>
