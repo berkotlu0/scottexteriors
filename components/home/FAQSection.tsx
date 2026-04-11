@@ -4,42 +4,42 @@ import React, { useState } from 'react';
 import { Plus, Minus, CheckCircle2 } from 'lucide-react';
 
 export default function FAQSection() {
-  // Senin attığın görsellerdeki orijinal FAQ metinleri (SEO uyumlu ve eksiksiz)
+  // Scott Exteriors'a özel SSS metinleri
   const faqs = [
     {
-      question: "What makes Infinity by Marvin windows better than vinyl?",
-      answer: "Infinity by Marvin windows use Ultrex fiberglass, which is significantly stronger and more durable than vinyl. Fiberglass won't warp, sag, or become brittle in extreme temperatures. It provides superior insulation, maintains structural integrity for decades, and offers better energy efficiency than vinyl alternatives."
+      question: "Do you offer free estimates for roofing and siding projects?",
+      answer: "Yes, absolutely! We provide 100% free, no-obligation estimates for all residential and commercial exterior projects in the greater Dallas/Fort Worth area. Our experts will assess your needs, take precise measurements, and give you a transparent quote."
     },
     {
-      question: "How long does James Hardie fiber cement siding last?",
-      answer: "James Hardie siding is designed to last 50 years or more with minimal maintenance. Fiber cement resists rot, warping, and insect damage that destroy wood siding, and is far more durable than vinyl. James Hardie backs their products with a 30-year non-prorated warranty, and Amazing Exteriors adds our own Lifetime Limited Warranty."
+      question: "How long does a typical roof replacement take?",
+      answer: "Most residential roof replacements are completed in just 1 to 2 days. Our highly experienced, full-time crews work efficiently without sacrificing quality. We handle everything from tear-off to final cleanup, ensuring your property is spotless before we leave."
     },
     {
-      question: "Can you install windows and siding at the same time?",
-      answer: "Yes, coordinating Infinity by Marvin window replacement with James Hardie siding installation is often the most efficient approach. This allows for proper integration of both systems, better weatherproofing, and a cohesive finished appearance. Our project managers coordinate all phases for minimal disruption to your daily routine."
+      question: "Are you fully insured and licensed in Texas?",
+      answer: "Yes. Scott Exteriors is fully insured for your complete protection and peace of mind. We maintain rigorous safety standards and comply with all local building codes and regulations across DFW municipalities."
     },
     {
-      question: "What is the ROI on new windows and siding?",
-      answer: "According to Remodeling Magazine's Cost vs. Value Report, window replacement and siding installation consistently rank among the top home improvements for return on investment, typically recouping 70-80% of costs at resale. Energy savings and reduced maintenance also provide ongoing financial benefits."
+      question: "What types of materials do you use for siding replacement?",
+      answer: "We install only premium, industry-leading siding materials proven to withstand extreme Texas weather. Whether you're looking for durable fiber cement siding, high-quality vinyl, or specialized wood siding, we offer solutions that maximize both curb appeal and energy efficiency."
     },
     {
-      question: "Do you offer financing options?",
-      answer: "Yes, Amazing Exteriors provides flexible financing options for qualified homeowners. Contact us to discuss available programs for your window and siding project, including promotional offers and payment plans to fit your budget."
+      question: "Do you help with storm or hail damage insurance claims?",
+      answer: "Yes! Living in Texas means dealing with severe weather. Our team has extensive experience working alongside homeowners during the insurance claims process for hail and wind damage, providing accurate documentation and thorough inspections to ensure your home is fully restored."
     }
   ];
 
-  // Alt kısımdaki sertifikalar ve güven maddeleri
+  // 🔥 8. MADDE EKLENDİ! ARTIK KUSURSUZ BİR 4x2 GRID OLACAK 🔥
   const credentials = [
-    "Elite Preferred James Hardie Contractor status",
-    "Authorized Infinity by Marvin Certified Installer",
-    "BBB Accredited Business",
-    "Qualified Remodeler Top 500",
-    "Nearly 200,000 homes successfully remodeled since 1989",
-    "Family-owned and operated for over 35 years",
-    "Comprehensive warranty protection on all installations"
+    "Family-owned and operated in Dallas since 1997",
+    "Multi-year Angie's List Super Service Award Winner",
+    "Houzz Award Winner for Excellence in Customer Service",
+    "Fully insured and bonded for residential and commercial work",
+    "Dedicated, factory-trained installation crews",
+    "Premium materials with full manufacturer warranties",
+    "Transparent pricing with no hidden fees",
+    "A+ Rating with the Better Business Bureau (BBB)" // Eksik olan parça tamamlandı!
   ];
 
-  // Accordion (Açılır/Kapanır) menü için state. İlk soru varsayılan olarak açık gelsin (0).
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggleFAQ = (index: number) => {
@@ -47,16 +47,17 @@ export default function FAQSection() {
   };
 
   return (
-    // bg-[#EFF6FC] -> Renkli arka plan (Premium geçiş)
-    <section className="relative w-full py-24 bg-[#EFF6FC] border-y border-gray-100">
+    <section className="relative w-full py-24 bg-emerald-50/50 border-y border-emerald-100/50">
       <div className="max-w-[1000px] mx-auto px-6">
         
-        {/* --- 1. BÖLÜM: FAQ (Sıkça Sorulan Sorular) --- */}
+        {/* --- 1. BÖLÜM: FAQ --- */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-[#1D3557] tracking-tight uppercase">
+          <p className="text-[#087F23] font-black tracking-[0.2em] uppercase mb-4 text-sm">
+            Got Questions?
+          </p>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
             Frequently Asked Questions
           </h2>
-          <div className="w-20 h-1.5 bg-[#DE5D5D] mx-auto mt-6 rounded-full"></div>
         </div>
 
         {/* Akordeon Liste */}
@@ -66,31 +67,29 @@ export default function FAQSection() {
             return (
               <div 
                 key={index} 
-                className="group flex flex-col rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
+                className="group flex flex-col rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-emerald-100/50"
               >
-                {/* Soru Başlığı (Tıklanabilir Alan) - Lacivert Arkaplan */}
                 <button
                   onClick={() => toggleFAQ(index)}
                   className={`w-full flex items-center justify-between p-5 md:p-6 text-left transition-colors duration-300 ${
-                    isOpen ? 'bg-[#1D3557] text-white' : 'bg-[#1D3557]/95 text-white hover:bg-[#1D3557]'
+                    isOpen ? 'bg-[#087F23] text-white' : 'bg-white text-slate-800 hover:bg-emerald-50'
                   }`}
                 >
-                  <span className="font-bold text-lg md:text-xl pr-4">
+                  <span className={`font-bold text-lg pr-4 transition-colors ${isOpen ? 'text-white' : 'text-slate-900 group-hover:text-[#087F23]'}`}>
                     {faq.question}
                   </span>
-                  <div className="flex-shrink-0 bg-white/10 p-2 rounded-full transition-transform duration-300">
+                  <div className={`flex-shrink-0 p-2 rounded-full transition-transform duration-300 ${isOpen ? 'bg-white/20 text-white' : 'bg-gray-100 text-[#087F23]'}`}>
                     {isOpen ? <Minus size={20} strokeWidth={2.5} /> : <Plus size={20} strokeWidth={2.5} />}
                   </div>
                 </button>
 
-                {/* Cevap Alanı (Yağ gibi kayan animasyon) */}
                 <div 
                   className={`grid transition-all duration-300 ease-in-out ${
                     isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
                   }`}
                 >
                   <div className="overflow-hidden">
-                    <div className="p-6 md:p-8 bg-white text-slate-600 leading-relaxed font-medium text-[15px] border-x border-b border-gray-200">
+                    <div className="p-6 md:p-8 bg-white text-slate-600 leading-relaxed font-medium text-[15px] border-x border-b border-gray-100">
                       {faq.answer}
                     </div>
                   </div>
@@ -101,19 +100,22 @@ export default function FAQSection() {
         </div>
 
         {/* --- 2. BÖLÜM: TRUSTED PARTNERSHIPS AND CREDENTIALS --- */}
-        <div className="bg-white rounded-3xl p-10 md:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-gray-100">
-          <div className="text-center mb-10">
-            <h3 className="text-2xl md:text-3xl font-extrabold text-[#1D3557] tracking-tight uppercase">
-              Trusted Partnerships and Credentials
+        <div className="bg-white rounded-3xl p-10 md:p-14 shadow-xl border border-gray-100 relative overflow-hidden">
+          <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#087F23] opacity-5 blur-[80px] rounded-full pointer-events-none"></div>
+
+          <div className="text-center mb-10 relative z-10">
+            <h3 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+              Trusted Excellence & Credentials
             </h3>
+            <div className="w-16 h-1.5 bg-[#087F23] mx-auto mt-4 rounded-full"></div>
           </div>
 
-          {/* Listeyi jilet gibi 2 kolona bölen grid yapısı */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5">
+          {/* Listeyi jilet gibi 2 kolona bölen grid yapısı (Artık tam 4x2 dengesinde) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-5 relative z-10">
             {credentials.map((item, idx) => (
               <div key={idx} className="flex items-start gap-3 group">
                 <CheckCircle2 
-                  className="text-[#3A6B9C] flex-shrink-0 mt-0.5 group-hover:scale-110 group-hover:text-[#DE5D5D] transition-all duration-300" 
+                  className="text-[#087F23] flex-shrink-0 mt-0.5 group-hover:scale-110 group-hover:text-[#4ADE80] transition-all duration-300" 
                   size={22} 
                   strokeWidth={2.5} 
                 />

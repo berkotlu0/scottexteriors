@@ -2,15 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { X } from 'lucide-react';
+import { X, ShieldCheck, Award } from 'lucide-react';
 
 export default function LeadPopup() {
   const [showPopup, setShowPopup] = useState(false);
   const [popupScale, setPopupScale] = useState(1);
   const [isMounted, setIsMounted] = useState(false);
 
-  // Popup'ın 8 saniye sonra açılması
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowPopup(true);
@@ -18,29 +16,23 @@ export default function LeadPopup() {
     return () => clearTimeout(timer);
   }, []);
 
-  // MATEMATİKSEL KÜÇÜLTME MERKEZİ
+  // MATEMATİKSEL ÖLÇEKLERME - PC TASARIMINI MOBİLE SIĞDIRIR 🔥
   useEffect(() => {
     setIsMounted(true);
     const calcScale = () => {
       const vw = window.innerWidth;
       const vh = window.innerHeight;
       
-      // Popup'ın Orijinal (PC) Boyutları
-      const BASE_W = 800; 
-      const BASE_H = 600;
+      const BASE_W = 800; // PC Genişliği
+      const BASE_H = 600; // PC Yüksekliği
 
-      // Ekran kenarlarından bırakılacak güvenlik boşluğu (Padding)
-      const paddingX = vw < 640 ? 20 : 40; 
-      const paddingY = vh < 640 ? 20 : 40;
+      const padding = 20; // Kenarlardan boşluk
 
-      // Ekrana tam sığması için gereken oranı hesapla
-      const scaleX = (vw - paddingX) / BASE_W;
-      const scaleY = (vh - paddingY) / BASE_H;
+      const scaleX = (vw - padding) / BASE_W;
+      const scaleY = (vh - padding) / BASE_H;
       
-      // En küçük olan oranı al (hiçbir yerden taşmasın)
-      const finalScale = Math.min(scaleX, scaleY, 1);
-      
-      setPopupScale(finalScale);
+      // En küçük oranı alıyoruz ki ekran dışına taşmasın
+      setPopupScale(Math.min(scaleX, scaleY, 1));
     };
     
     if (showPopup) {
@@ -53,18 +45,16 @@ export default function LeadPopup() {
   if (!showPopup) return null;
 
   return (
-    // Dış Taşıyıcı: Sabit, kaydırmaz, ekranı kaplar
     <div className="fixed inset-0 z-[999] flex items-center justify-center overflow-hidden">
-      
       {/* Arka Plan Karartması */}
       <div 
-        className="absolute inset-0 bg-[#0B1221]/70 backdrop-blur-md animate-in fade-in duration-500"
+        className="absolute inset-0 bg-[#050A0F]/90 backdrop-blur-md animate-in fade-in duration-500"
         onClick={() => setShowPopup(false)}
       />
       
-      {/* ANA POPUP: Sabit 800px genişlikte, sadece "scale" ile küçülür/büyür */}
+      {/* ANA POPUP - 800px SABİT TUTULDU, SCALE İLE KÜÇÜLÜYOR 🔥 */}
       <div 
-        className="relative bg-[#1D3557] rounded-[2rem] shadow-[0_30px_100px_rgba(0,0,0,0.5)] flex flex-col border border-white/10 origin-center transition-all duration-300"
+        className="relative bg-[#0F1713] rounded-[2.5rem] shadow-[0_40px_120px_rgba(0,0,0,0.8)] flex flex-col border border-white/5 origin-center transition-all duration-300"
         style={{ 
           width: '800px', 
           transform: `scale(${popupScale})`,
@@ -73,122 +63,100 @@ export default function LeadPopup() {
         }}
       >
         
-        {/* Dalgalar */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[2rem]">
-            <div className="absolute top-[-50%] left-1/2 w-[200%] h-[200%] rounded-[40%] bg-white/[0.03] animate-wave z-0"></div>
-            <div className="absolute top-[-45%] left-1/2 w-[200%] h-[200%] rounded-[38%] bg-white/[0.02] animate-wave-fast z-0"></div>
+        {/* Hareketli Dalgalar */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-[2.5rem]">
+            <div className="absolute top-[-50%] left-1/2 w-[200%] h-[200%] rounded-[40%] bg-[#087F23]/[0.05] animate-wave z-0"></div>
+            <div className="absolute top-[-45%] left-1/2 w-[200%] h-[200%] rounded-[38%] bg-[#087F23]/[0.03] animate-wave-fast z-0"></div>
         </div>
 
         {/* Kapat Butonu */}
         <button 
           onClick={() => setShowPopup(false)}
-          className="absolute top-5 right-5 z-30 bg-black/20 text-white p-2.5 rounded-full hover:bg-[#3A6B9C] transition-all backdrop-blur-md border border-white/10"
+          className="absolute top-6 right-6 z-40 bg-white/5 text-white/40 p-2.5 rounded-full hover:bg-[#087F23] hover:text-white transition-all backdrop-blur-md border border-white/5"
         >
           <X size={20} strokeWidth={3} />
         </button>
 
-        {/* İÇERİK - Tamamen Sabit PC Tasarımı (Flex Row) */}
-        <div className="relative z-10 flex flex-row p-8 gap-8">
+        {/* İÇERİK - FLEX-ROW OLARAK SABİTLENDİ (PC GÖRÜNÜMÜ) 🔥 */}
+        <div className="relative z-10 flex flex-row p-10 gap-10">
           
-          {/* SOL Taraf: Promosyonlar (Genişlik: 300px sabit) */}
-          <div className="w-[300px] flex flex-col gap-5 justify-center">
+          {/* SOL Taraf: Trust Cards (300px Sabit) */}
+          <div className="w-[300px] flex flex-col gap-6 justify-center">
               
-              {/* Infinity Promo */}
-              <div className="flex flex-col rounded-2xl overflow-hidden shadow-xl border border-white/5 bg-[#3A3A3A]/40 backdrop-blur-md">
-                  <div className="bg-[#2B5E93]/80 py-3 flex items-center justify-center h-16">
-                      <Image src="/Infinity_Logo_CMYK_WHITE.svg" alt="Infinity" width={140} height={40} className="object-contain" />
+              <div className="flex flex-col rounded-3xl overflow-hidden border border-white/5 bg-white/[0.03] backdrop-blur-xl">
+                  <div className="bg-[#087F23]/90 py-4 flex items-center justify-center h-16">
+                      <ShieldCheck className="text-white" size={32} />
                   </div>
-                  <div className="p-5 text-center">
-                      <h3 className="text-[#3A6B9C] text-xl font-black mb-1 tracking-tighter italic">SPRING SALE</h3>
-                      <p className="text-white text-xs font-bold mb-2 leading-tight">Save $325 each Window, $775 each Patio Door</p>
-                      <p className="text-white/50 text-[9px] mb-4 font-medium uppercase tracking-widest">Plus, NO Payments/Interest for 2 Years@</p>
-                      <button type="button" className="bg-[#3A6B9C] hover:bg-white hover:text-[#3A6B9C] text-white font-black text-[10px] px-8 py-3 rounded-full transition-all uppercase tracking-widest w-full">FIND OUT MORE</button>
+                  <div className="p-6 text-center">
+                      <h3 className="text-white text-lg font-black uppercase">Trusted</h3>
+                      <p className="text-emerald-100/60 text-[11px] font-bold mt-1">Dallas area integrity since 1997.</p>
                   </div>
               </div>
 
-              {/* James Hardie Promo */}
-              <div className="flex flex-col rounded-2xl overflow-hidden shadow-xl border border-white/5 bg-[#3A3A3A]/40 backdrop-blur-md">
-                  <div className="bg-[#FDB913] py-3 flex items-center justify-center h-16">
-                      <Image src="/James_Hardie_logo.webp" alt="James Hardie" width={140} height={40} className="object-contain" />
+              <div className="flex flex-col rounded-3xl overflow-hidden border border-white/5 bg-white/[0.03] backdrop-blur-xl">
+                  <div className="bg-slate-800 py-4 flex items-center justify-center h-16">
+                      <Award className="text-emerald-400" size={32} />
                   </div>
-                  <div className="p-5 text-center">
-                      <h3 className="text-[#FDB913] text-xl font-black mb-1 tracking-tighter italic">SPRING SALE</h3>
-                      <p className="text-white text-xs font-bold mb-5 italic leading-tight">50% OFF Siding Materials</p>
-                      <button type="button" className="bg-[#FDB913] hover:bg-white text-black font-black text-[10px] px-8 py-3 rounded-full transition-all uppercase tracking-widest w-full">FIND OUT MORE</button>
+                  <div className="p-6 text-center">
+                      <h3 className="text-white text-lg font-black uppercase">Premium</h3>
+                      <p className="text-emerald-100/60 text-[11px] font-bold mt-1">Award-winning quality.</p>
                   </div>
               </div>
           </div>
 
-          {/* SAĞ Taraf: Form (Genişlik: Kalan boşluk) */}
+          {/* SAĞ Taraf: Form */}
           <div className="flex-1 flex flex-col justify-center">
-            <h3 className="text-[32px] font-black text-white mb-1 tracking-tighter leading-none">Request Your Quote</h3>
-            <p className="text-white/60 mb-5 font-medium text-xs">Simply fill out the form below to secure your limited-time savings.</p>
+            <div className="mb-6 text-left">
+              <h3 className="text-[38px] font-black text-white mb-1 tracking-tighter leading-none">Expert Estimate</h3>
+              <p className="text-emerald-500 font-bold text-xs uppercase tracking-widest">Start Your Dallas Project Today</p>
+            </div>
 
-            <form className="space-y-3.5">
-              <select className="w-full px-4 py-3 bg-white/[0.05] border border-white/10 text-white text-xs rounded-xl outline-none focus:border-[#3A6B9C] transition-colors appearance-none cursor-pointer">
-                <option className="bg-[#1D3557]">Please select your location</option>
-                <option className="bg-[#1D3557]">Austin, TX</option>
-                <option className="bg-[#1D3557]">Dallas, TX</option>
-                <option className="bg-[#1D3557]">Houston, TX</option>
-                <option className="bg-[#1D3557]">San Antonio, TX</option>
+            <form className="space-y-3.5" onSubmit={(e) => e.preventDefault()}>
+              <div className="grid grid-cols-2 gap-3.5">
+                <input type="text" placeholder="First Name" className="w-full px-5 py-3.5 bg-white/[0.03] border border-white/10 text-white text-xs rounded-2xl outline-none focus:border-[#087F23] transition-all" />
+                <input type="text" placeholder="Last Name" className="w-full px-5 py-3.5 bg-white/[0.03] border border-white/10 text-white text-xs rounded-2xl outline-none focus:border-[#087F23] transition-all" />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3.5">
+                <input type="tel" placeholder="Phone Number" className="w-full px-5 py-3.5 bg-white/[0.03] border border-white/10 text-white text-xs rounded-2xl outline-none focus:border-[#087F23] transition-all" />
+                <input type="email" placeholder="Email Address" className="w-full px-5 py-3.5 bg-white/[0.03] border border-white/10 text-white text-xs rounded-2xl outline-none focus:border-[#087F23] transition-all" />
+              </div>
+
+              <select className="w-full px-5 py-3.5 bg-white/[0.03] border border-white/10 text-white text-xs rounded-2xl outline-none focus:border-[#087F23] appearance-none cursor-pointer">
+                <option className="bg-[#0F1713]">Select Service Needed...</option>
+                <option className="bg-[#0F1713]">Roofing Installation</option>
+                <option className="bg-[#0F1713]">Siding Replacement</option>
+                <option className="bg-[#0F1713]">Window Services</option>
               </select>
 
-              <div className="grid grid-cols-2 gap-3.5">
-                <input type="text" placeholder="First Name" className="w-full px-4 py-3 bg-white/[0.05] border border-white/10 text-white placeholder:text-white/30 text-xs rounded-xl outline-none focus:border-[#3A6B9C] transition-all" />
-                <input type="text" placeholder="Last Name" className="w-full px-4 py-3 bg-white/[0.05] border border-white/10 text-white placeholder:text-white/30 text-xs rounded-xl outline-none focus:border-[#3A6B9C] transition-all" />
-              </div>
-
-              <div className="grid grid-cols-2 gap-3.5">
-                <input type="tel" placeholder="Mobile Phone" className="w-full px-4 py-3 bg-white/[0.05] border border-white/10 text-white placeholder:text-white/30 text-xs rounded-xl outline-none focus:border-[#3A6B9C] transition-all" />
-                <input type="email" placeholder="Email" className="w-full px-4 py-3 bg-white/[0.05] border border-white/10 text-white placeholder:text-white/30 text-xs rounded-xl outline-none focus:border-[#3A6B9C] transition-all" />
-              </div>
-
-              <input type="text" placeholder="Zip Code" className="w-full px-4 py-3 bg-white/[0.05] border border-white/10 text-white placeholder:text-white/30 text-xs rounded-xl outline-none focus:border-[#3A6B9C] transition-all" />
-
-              <div className="py-1">
-                <p className="text-[#3A6B9C] font-black text-[10px] mb-2.5 uppercase tracking-[0.2em]">What are you interested in?</p>
-                <div className="flex gap-5">
-                  {['Windows', 'Doors', 'Siding'].map((item) => (
+              <div className="py-2">
+                <p className="text-[#087F23] font-black text-[10px] mb-3 uppercase tracking-[0.2em]">Best time to contact?</p>
+                <div className="flex gap-6">
+                  {['Morning', 'Afternoon', 'Evening'].map((item) => (
                     <label key={item} className="flex items-center gap-2 cursor-pointer group">
-                      <input type="radio" name="interest" className="accent-[#3A6B9C] w-4 h-4" />
-                      <span className="text-white/70 text-[11px] font-bold uppercase tracking-wider group-hover:text-white transition-colors">{item}</span>
+                      <input type="radio" name="time" className="accent-[#087F23] w-4 h-4" />
+                      <span className="text-white/50 text-[11px] font-bold uppercase tracking-wider group-hover:text-white transition-colors">{item}</span>
                     </label>
                   ))}
                 </div>
               </div>
 
-              <div className="flex items-start gap-2.5 pt-1">
-                <input type="checkbox" id="consent" className="mt-0.5 accent-[#3A6B9C] shrink-0 w-3.5 h-3.5" required />
-                <label htmlFor="consent" className="text-[10px] text-white/40 leading-relaxed italic">
-                  I agree to be contacted by Amazing Exteriors via phone/SMS/email. We respect your <Link href="/privacy" className="text-[#3A6B9C] hover:text-white font-bold transition-colors">Privacy Policy</Link>.
-                </label>
-              </div>
-
-              <button type="submit" className="w-full bg-[#3A6B9C] hover:bg-white hover:text-[#3A6B9C] text-white font-black text-[11px] uppercase tracking-[0.3em] py-4 rounded-full transition-all shadow-2xl transform active:scale-95 mt-1">
-                SEND MESSAGE
+              <button type="submit" className="w-full bg-[#087F23] hover:bg-white hover:text-[#087F23] text-white font-black text-[12px] uppercase tracking-[0.3em] py-4.5 rounded-2xl transition-all shadow-xl transform active:scale-[0.98] mt-2">
+                GET MY FREE QUOTE
               </button>
             </form>
           </div>
         </div>
 
-        {/* Alt Logo Bandı */}
-        <div className="relative z-10 bg-white p-6 flex items-center justify-between border-t border-white/10 rounded-b-[2rem]">
-          {[
-            { src: "/popup/bbb-768x361.png", alt: "BBB" },
-            { src: "/popup/qualifiedremodeler.png", alt: "Qualified Remodeler" },
-            { src: "/popup/google-768x361.png", alt: "Google" },
-            { src: "/popup/facebook-768x361.png", alt: "Facebook" }
-          ].map((item, i) => (
-            <div key={i} className={`flex-1 px-4 flex justify-center ${i < 3 ? 'border-r border-slate-100' : ''}`}>
-              <Image 
-                src={item.src} 
-                alt={item.alt} 
-                width={120} 
-                height={40} 
-                className="object-contain h-8 hover:scale-110 transition-transform duration-300" 
-              />
-            </div>
-          ))}
+        {/* ALT BAND - PC GÖRÜNÜMÜ KORUNDU 🔥 */}
+        <div className="relative z-20 bg-white p-5 flex flex-row items-center justify-between border-t border-slate-200 rounded-b-[2.5rem]">
+           <div className="flex-1 flex justify-center border-r border-slate-200">
+             <Image src="/logs12.webp" alt="Awards" width={280} height={35} className="object-contain h-7 grayscale brightness-0 opacity-80" />
+           </div>
+           <div className="flex-1 flex flex-col items-center justify-center">
+             <span className="text-[10px] font-black text-[#087F23] uppercase tracking-widest mb-0.5">Scott Exteriors</span>
+             <span className="text-[8px] font-bold text-[#087F23]/60 uppercase tracking-widest leading-none italic">Managed by B&S Media</span>
+           </div>
         </div>
 
       </div>

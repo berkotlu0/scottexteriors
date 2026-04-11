@@ -10,7 +10,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Amazing Exteriors | Premium Texas Homes",
+  title: "Scott Exteriors | Premium Texas Homes",
   description: "Premium windows, siding, and doors that last.",
 };
 

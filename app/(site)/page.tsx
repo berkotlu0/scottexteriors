@@ -41,25 +41,18 @@ export default function HomePage() {
         {/* 1. HeroSection (Buna Reveal koymuyoruz ki sayfa açılır açılmaz görünsün) */}
         <HeroSection />
 
-        {/* 2. Kampanyalar */}
+        {/* 5. Ürün Kategorileri */}
         <ScrollReveal>
-          <SpecialOffers />
+          <ProductCategories />
         </ScrollReveal>
 
-        {/* 3. Güven Bandı */}
-        <ScrollReveal>
-          <TrustBar />
-        </ScrollReveal>
+      
 
         {/* 4. Marka Farkı */}
         <ScrollReveal>
           <AmazingDifference />
         </ScrollReveal>
 
-        {/* 5. Ürün Kategorileri */}
-        <ScrollReveal>
-          <ProductCategories />
-        </ScrollReveal>
 
         {/* 6. Blog & İçerik */}
         <ScrollReveal>
