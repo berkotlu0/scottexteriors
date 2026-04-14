@@ -34,6 +34,9 @@ export default function HeroSection() {
               index === currentImage ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
             }`}
             priority={index === 0} 
+            // 🔥 PERFORMANS SİHİRLERİ BURADA BAŞLIYOR 🔥
+            quality={60} // Kaliteyi %60'a çektik, gözle fark edilmez ama boyutu yarı yarıya düşürür!
+            sizes="100vw" // Tarayıcıya ekran genişliğine göre boyut seçmesini emrediyoruz!
           />
         ))}
         {/* Karartma Overlay - Mobilde daha yoğun, masaüstünde geçişli */}

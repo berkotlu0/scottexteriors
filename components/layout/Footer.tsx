@@ -14,6 +14,7 @@ export default function Footer() {
       target="_blank" 
       rel="noopener noreferrer" 
       className="group flex flex-col items-end gap-0.5 relative no-underline"
+      aria-label="Visit B&S Media website" // 🔥 SEO: Link açıklaması eklendi
     >
       <span className="text-[7px] tracking-[0.4em] text-slate-400 uppercase font-sans group-hover:text-[#087F23] transition-colors duration-700">
         Digital Architecture by
@@ -84,14 +85,15 @@ export default function Footer() {
               Family-owned DFW experts since 1997. Premium roofing, windows, and siding with award-winning quality.
             </p>
             
+            {/* 🔥 SEO: SOSYAL MEDYA LİNKLERİNE ARIA-LABEL EKLENDİ 🔥 */}
             <div className="flex gap-2">
-              <a href={socialLinks.facebook} target="_blank" className="p-2 rounded-lg bg-white border border-emerald-50 text-[#087F23] hover:bg-[#087F23] hover:text-white transition-all shadow-sm">
+              <a href={socialLinks.facebook} aria-label="Visit Scott Exteriors Facebook Page" target="_blank" className="p-2 rounded-lg bg-white border border-emerald-50 text-[#087F23] hover:bg-[#087F23] hover:text-white transition-all shadow-sm">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
               </a>
-              <a href={socialLinks.twitter} target="_blank" className="p-2 rounded-lg bg-white border border-emerald-50 text-[#087F23] hover:bg-[#087F23] hover:text-white transition-all shadow-sm">
+              <a href={socialLinks.twitter} aria-label="Visit Scott Exteriors Twitter Profile" target="_blank" className="p-2 rounded-lg bg-white border border-emerald-50 text-[#087F23] hover:bg-[#087F23] hover:text-white transition-all shadow-sm">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
               </a>
-              <a href={socialLinks.youtube} target="_blank" className="p-2 rounded-lg bg-white border border-emerald-50 text-[#087F23] hover:bg-[#087F23] hover:text-white transition-all shadow-sm">
+              <a href={socialLinks.youtube} aria-label="Visit Scott Exteriors YouTube Channel" target="_blank" className="p-2 rounded-lg bg-white border border-emerald-50 text-[#087F23] hover:bg-[#087F23] hover:text-white transition-all shadow-sm">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.14 1 12 1 12s0 3.86.42 5.58a2.78 2.78 0 0 0 1.94 2c1.71.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.86 23 12 23 12s0-3.86-.42-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
               </a>
             </div>
@@ -139,17 +141,16 @@ export default function Footer() {
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
           <div className="flex flex-col md:flex-row items-center gap-6">
-            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+            {/* 🔥 KONTRAST HATASI İÇİN text-slate-500 YAPILDI 🔥 */}
+            <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">
               © {new Date().getFullYear()} Scott Exteriors. All rights reserved.
             </p>
-            {/* 🔥 ROZETLER SİYAHLARI KUŞANDI! 🔥 */}
             <div className="opacity-80 hover:opacity-100 transition-opacity duration-500">
                <Image 
                 src="/logs12.webp" 
                 alt="Scott Exteriors Awards" 
                 width={280} 
                 height={40} 
-                // grayscale brightness-0 ile resmi simsiyah yaptık
                 className="object-contain h-8 w-auto grayscale brightness-0 opacity-80"
               />
             </div>

@@ -62,13 +62,14 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* 2. ANA NAVBAR - Menü Renkleri Yeşile Çekildi 🔥 */}
+        {/* 2. ANA NAVBAR */}
         <div className="bg-white/70 backdrop-blur-2xl border-b border-emerald-100/50 relative z-40 shadow-sm">
           
           {/* Mobil Görünüm */}
           <div className="max-w-[1600px] mx-auto px-5 h-16 flex items-center justify-between lg:hidden">
             <button 
               onClick={() => setIsMobileMenuOpen(true)}
+              aria-label="Open mobile menu" // 🔥 ERİŞİLEBİLİRLİK (SEO) İÇİN EKLENDİ
               className="text-[#087F23] p-2 -ml-2 focus:outline-none"
             >
               <Menu size={28} />
@@ -79,10 +80,10 @@ export default function Navbar() {
             <div className="w-10"></div>
           </div>
 
-          {/* Masaüstü Görünüm 🔥 */}
+          {/* Masaüstü Görünüm */}
           <div className="max-w-[1600px] mx-auto px-8 hidden lg:flex flex-col items-center py-4 relative gap-3">
             
-            {/* Sağ Köşe: Financing & Estimate (Görünürlük Artırıldı) */}
+            {/* Sağ Köşe: Financing & Estimate */}
             <div className="absolute right-8 top-1/2 -translate-y-1/2 flex flex-col items-stretch gap-2.5">
               <Link href="/financing">
                 <button className="w-full bg-white/50 hover:bg-[#087F23] text-[#087F23] hover:text-white border-2 border-[#087F23]/20 hover:border-[#087F23] px-7 py-2 rounded-full font-black transition-all duration-300 text-[10px] uppercase tracking-[0.2em]">
@@ -99,7 +100,7 @@ export default function Navbar() {
               <Image src="/scott-ext.svg" alt="Logo" width={300} height={100} className="h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-500" priority />
             </Link>
 
-            {/* Orta: MENÜ (Yazılar Yeşil Yapıldı) 🔥 */}
+            {/* Orta: MENÜ */}
             <nav className="flex items-center justify-center gap-10">
               {['Home', 'Roofing', 'Siding', 'Windows', 'About Us', 'Contact'].map((item) => (
                 <div key={item} className="flex items-center gap-1.5 group cursor-pointer">
@@ -119,14 +120,20 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* 3. MOBİL ÇEKMECE - Her Şey Görünür ve Yeşil 🔥 */}
+      {/* 3. MOBİL ÇEKMECE */}
       <div className={`fixed inset-0 z-50 lg:hidden transition-all duration-500 ${isMobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
         <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
         <div className={`absolute top-0 left-0 w-[85%] max-w-sm h-full bg-emerald-50 shadow-2xl transition-transform duration-500 ease-in-out flex flex-col ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
           
           <div className="flex items-center justify-between p-6 bg-white border-b border-emerald-100">
             <Image src="/scott-ext.svg" alt="Logo" width={160} height={50} className="h-8 w-auto object-contain" />
-            <button onClick={() => setIsMobileMenuOpen(false)} className="text-[#087F23] bg-emerald-50 p-2 rounded-full"><X size={20} /></button>
+            <button 
+              onClick={() => setIsMobileMenuOpen(false)} 
+              aria-label="Close mobile menu" // 🔥 ERİŞİLEBİLİRLİK (SEO) İÇİN EKLENDİ
+              className="text-[#087F23] bg-emerald-50 p-2 rounded-full hover:bg-emerald-100 transition-colors"
+            >
+              <X size={20} />
+            </button>
           </div>
 
           <nav className="flex flex-col flex-grow p-8 gap-7 overflow-y-auto">

@@ -2,11 +2,13 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import dynamic from 'next/dynamic'; // 🔥 SİHİRLİ PERFORMANS DOKUNUŞU 🔥
+
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import HeroSection from '@/components/home/HeroSection';
-import SpecialOffers from '@/components/home/SpecialOffers';
-import TrustBar from '@/components/home/TrustBar';
+// import SpecialOffers from '@/components/home/SpecialOffers'; // (Kullanmıyorsan sil veya yorumda kalsın)
+// import TrustBar from '@/components/home/TrustBar';
 import AmazingDifference from '@/components/home/AmazingDifference';
 import ProductCategories from '@/components/home/ProductCategories';
 import RecentPosts from '@/components/home/RecentPosts';
@@ -14,9 +16,11 @@ import WhyTrustUs from '@/components/home/WhyTrustUs';
 import ServiceAreas from '@/components/home/ServiceAreas';
 import FAQSection from '@/components/home/FAQSection';
 
-// Operasyonel Bileşenler
-import LeadPopup from '@/components/home/LeadPopup';
-import FloatingWidget from '@/components/home/FloatingWidget';
+// 🔥 OPERASYONEL BİLEŞENLER (LAZY LOAD / TEMBEL YÜKLEME) 🔥
+// Bunlar sayfanın ilk yüklenmesini bloklamaz, arka planda usulca indirilir.
+// Bu sayede Total Blocking Time (TBT) ve Kullanılmayan JS hataları tarihe karışır!
+const LeadPopup = dynamic(() => import('@/components/home/LeadPopup'), { ssr: false });
+const FloatingWidget = dynamic(() => import('@/components/home/FloatingWidget'), { ssr: false });
 
 // --- SEKSİ KAYDIRMA WRAPPER'I ---
 // Her section'ı bu arkadaşla sarıyoruz ki süzülerek gelsinler
@@ -41,46 +45,44 @@ export default function HomePage() {
         {/* 1. HeroSection (Buna Reveal koymuyoruz ki sayfa açılır açılmaz görünsün) */}
         <HeroSection />
 
-        {/* 5. Ürün Kategorileri */}
+        {/* 2. Ürün Kategorileri */}
         <ScrollReveal>
           <ProductCategories />
         </ScrollReveal>
 
-      
-
-        {/* 4. Marka Farkı */}
+        {/* 3. Marka Farkı */}
         <ScrollReveal>
           <AmazingDifference />
         </ScrollReveal>
 
-
-        {/* 6. Blog & İçerik */}
+        {/* 4. Blog & İçerik */}
         <ScrollReveal>
           <RecentPosts />
         </ScrollReveal>
 
-        {/* 7. Neden Biz */}
+        {/* 5. Neden Biz */}
         <ScrollReveal>
           <WhyTrustUs />
         </ScrollReveal>
 
-        {/* 8. Hizmet Bölgeleri */}
+        {/* 6. Hizmet Bölgeleri */}
         <ScrollReveal>
           <ServiceAreas />
         </ScrollReveal>
 
-        {/* 9. FAQ Bölümü */}
+        {/* 7. FAQ Bölümü */}
         <ScrollReveal>
           <FAQSection />
         </ScrollReveal>
       </main>
 
-      {/* 10. Footer (Bu da süzülerek gelebilir ama genelde sabit kalması daha asil durur) */}
+      {/* 8. Footer (Sabit kalması asil durur) */}
       <Footer />
 
       {/* --- ARKA PLAN OPERASYONLARI --- */}
-      <LeadPopup />
+      {/* Artık sayfayı kastırmayacaklar, çünkü dynamic olarak yüklendiler */}
       <FloatingWidget />
+      <LeadPopup />
       
     </div>
   );
